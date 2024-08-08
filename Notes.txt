@@ -1,0 +1,194 @@
+
+React Component Lifecycle
+
+The series of events that happen from the mounting of a React component to its Unmounting
+
+Mounting - Birth of your component
+
+Update - Growth of your component
+
+Unmount - Death of your component
+
+
+
+/* Methods in React Component Lifecycle */
+
+/* The render() */
+     method is used to render HTML of the component in react. This method is required for a class based component to render the DOM It runs during the mounting and updating of your component render() method should be pure le you cannot modify state inside it!
+
+
+/* The componentDidMount() */
+     method runs after the component output has been rendered to the DOM
+
+
+/* The componentDidUpdate() */ 
+     method is invoked as soon as the updating happens. The most common use case for the componentDidUpdate() method is updating the DOM in response to prop or state changes.
+
+
+/* The componentWill Unmount() */
+     lifecycle method is called just before the component is unmounted and destroyed. Usually used to perform cleanups
+
+
+
+
+
+
+/* In this news app we will learn about class components of the react-app */
+
+// by typing 'rce' snippet we can generate the code: 
+    import React, { Component } from 'react'
+
+    export class NewsSection extends Component {
+    render() {
+        return (
+        <div>
+            
+        </div>
+        )
+    }
+    }
+
+    export default NewsSection
+
+
+// by typing 'rcep' snippet we can generate the code including props.
+
+
+
+/* What is this? */
+    In JavaScript, the this keyword refers to an object.
+
+    Which object depends on how this is being invoked (used or called).
+
+    “This” keyword refers to an object that is executing the current piece of code. It references the object that is executing the current function. If the function being referenced is a regular function, “this” references the global object.
+
+    The this keyword refers to different objects depending on how it is used:
+
+    In an object method, this refers to the object.
+    Alone, this refers to the global object.
+    In a function, this refers to the global object.
+    In a function, in strict mode, this is undefined.
+    In an event, this refers to the element that received the event.
+    Methods like call(), apply(), and bind() can refer this to any object.
+    Note
+    this is not a variable. It is a keyword. You cannot change the value of this.
+    this in a Method
+    When used in an object method, this refers to the object.
+
+    In the example on top of this page, this refers to the person object.
+
+    Because the fullName method is a method of the person object.
+
+
+// by using this.props we can simply use the props just by using 'this' :
+    let {title,discription} = this.props
+
+
+// className here are with respect to bootstrap. 
+    Until we learned 'container' for containers. 'row' for rows. 'col' for columns.
+
+
+// there are inline css attributes like my, my, mt, mb, pt, py, px.....where m=margin and p=padding 
+
+
+
+//  .col- (extra small devices - screen width less than 576px)
+    .col-sm- (small devices - screen width equal to or greater than 576px)
+    .col-md- (medium devices - screen width equal to or greater than 768px)
+    .col-lg- (large devices - screen width equal to or greater than 992px)
+    .col-xl- (xlarge devices - screen width equal to or greater than 1200px)
+
+
+
+/* Button sizes */
+    <button type="button" class="btn btn-sm">Small button</button>
+    <button type="button" class="btn btn-lg">Large button</button>
+    <button type="button" class="btn btn-lg btn-block">Block level button</button>
+
+/* Button color */
+    <button type="button" class="btn btn-outline-primary">Primary</button>
+    <button type="button" class="btn btn-outline-secondary">Secondary</button>
+    <button type="button" class="btn btn-outline-success">Success</button>
+    <button type="button" class="btn btn-outline-danger">Danger</button>
+    <button type="button" class="btn btn-outline-warning">Warning</button>
+    <button type="button" class="btn btn-outline-info">Info</button>
+    <button type="button" class="btn btn-outline-light">Light</button>
+    <button type="button" class="btn btn-outline-dark">Dark</button>
+
+/* Button Style */
+    .btn
+    .btn-default
+    .btn-primary
+    .btn-success
+    .btn-info
+    .btn-warning
+    .btn-danger
+    .btn-link
+
+
+
+/* Construsctors */
+     A constructor is a special function that creates and initializes an object instance of a class. The purpose of a constructor is to create a new object and set values for any existing object properties. It is a predifined method/function fro any class that creates object and runs at the start of the class.
+      
+    In react you cannot write Construsctors as it is you must mention super(); fro them to work. Basicallt constructor work when its object is created.
+    super() is used to call a superclass constructor: When a subclass is created, its constructor must call the constructor of its parent class. This is done using the super() keyword, which calls the constructor of the parent class.
+
+
+
+/* state */
+     The state is a built-in React object that is used to contain data or information about the component. A component's state can change over time; whenever it changes, the component re-renders. Basically we use props when we wants to change the state of the component again and again and whithout completely reloading the webpage. In React, state updates may be asynchronous, meaning that the state may not update immediately after calling setState(). This can lead to unexpected behavior if you rely on the current state (this.state) immediately after calling setState(), as you may not get the updated state.
+
+
+/* props */
+     Props are arguments passed into React components. Props are passed to components via HTML attributes. props stands for properties. React Props are like function arguments in JavaScript and attributes in HTML. 
+    In React.js, the .props property is not a function; it's an object that allows a component to receive and use properties (props) passed to it from its parent component. Props provide a way to make components dynamic and reusable by allowing external data to influence their behavior. 
+
+
+/* Difference between props and states */
+     is that props are read-only and connot be changed.
+     Whereas, state can be changed as wish.
+     we can define a state inside props and change the state but the props are read only.
+
+
+/* map */
+     In React, you can use the . map() method to iterate through an array and render a list of elements. The .map() method will take a callback as an argument and return a new array with the returned value of the callback. 
+     In React.js, the .map() function is commonly used to iterate over an array and render a component for each item in the array. This is particularly useful when you want to dynamically generate components based on the data you have. 
+     Basically map and forEach works similar only difference is that forEach performs and returns the same array.
+     Whereas map() to iterate through an array and render a list of elements and provide us with a new array each time.
+
+
+/* componentDidMount() */ 
+    The componentDidMount() method allows us to execute the React code when the component is already placed in the DOM (Document Object Model). This method is called during the Mounting phase of the React Life-cycle i.e after the component is rendered.
+    All the AJAX requests and the DOM or state updation should be coded in the componentDidMount() method block. We can also set up all the major subscriptions here but to avoid any performance issues, always remember to unsubscribe them in the componentWillUnmount() method.
+    In React, componentDidMount is a lifecycle method that is invoked immediately after a component is mounted (i.e., inserted into the DOM tree). This method is commonly used for performing actions that require interactions with the DOM or fetching data from an external source, such as an API.
+
+
+// In class based components constructor() works first after that render() adn at the end componentDidMount() works.
+
+
+/* The Math.ceil() */
+     method in JavaScript rounds up a number to the nearest integer and returns the result. For example, Math.ceil(0.95) returns 1, and Math.ceil(3.14) returns 4. rounds up to the next nearest integer.
+
+
+/* state:defaultProps */ 
+    In React, default props are a way to provide default values for props that are not required by the component. They are defined as a static property on the component class, and can be used to set the default props for the class.
+    Here is an example of how to use default props:
+    JavaScript
+    class MyComponent extends React.Component {
+    static defaultProps = {
+        name: 'John Doe',
+        age: 30,
+    };
+
+    render() {
+        const { name, age } = this.props;
+
+        return (
+        <div>
+            <h1>My name is {name} and I am {age} years old.</h1>
+        </div>
+        );
+    }
+    }
+
+    It simply means that once you have declared the props as 'static defaultProps' in the code then you have to simply them call them as {name} & {age} insetad of {this.props.name} & {this.props.age}

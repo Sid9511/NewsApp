@@ -1,0 +1,22 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+body {
+  @apply bg-white text-gray-900; }
+
+
+  body.dark-mode {
+  @apply bg-gray-900 text-white; 
+}
+
+nav {
+  @apply bg-gray-800; 
+}
+
+nav.dark-mode {
+  @apply bg-gray-900; 
+}
+
+  

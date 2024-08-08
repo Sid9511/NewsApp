@@ -1,0 +1,49 @@
+.App {
+  @apply text-center;
+}
+
+.App-logo {
+  @apply h-40 cursor-pointer;
+}
+
+.App-header {
+  @apply bg-gray-800 min-h-screen flex flex-col items-center justify-center text-white text-xl;
+}
+
+.App-link {
+  @apply text-blue-400;
+}
+
+.dark .App-header {
+  @apply bg-gray-900; 
+}
+
+.dark .App-link {
+  @apply text-blue-300;
+}
+
+body.dark .header {
+  @apply text-white;
+}
+
+body.dark .container {
+  @apply bg-gray-900; 
+}
+
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    @apply animate-spin;
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
