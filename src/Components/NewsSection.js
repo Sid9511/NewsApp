@@ -11,7 +11,7 @@ const NewsSection = (props) => {
   const [loading, setLoading] = useState(true);
   const [page, setPage] = useState(1);
   const [totalResults, setTotalResults] = useState(0);
-  const [error, setError] = useState(null); // New state for error handling
+  const [error, setError] = useState(null); 
 
   const capitalize = (string) => {
     return string.charAt(0).toUpperCase() + string.slice(1);
@@ -21,7 +21,7 @@ const NewsSection = (props) => {
     props.setProgress(10);
     const url = `https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.category}&apiKey=${props.apiKey}&pageSize=${props.pageSize}&page=${page}`;
     setLoading(true);
-    setError(null); // Reset error before new request
+    setError(null); 
     props.setProgress(40);
 
     try {
