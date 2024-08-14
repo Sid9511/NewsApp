@@ -1,47 +1,73 @@
+const { MongoClient } = require('mongodb');
 const express = require('express');
-const mongoose = require('mongoose');
 const cors = require('cors');
-require('dotenv').config();
+const dotenv = require('dotenv');
+const bodyParser = require('body-parser');
+
+dotenv.config();
 
 const app = express();
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 3002;
+const url = process.env.MONGO_URI;
 
-// Middleware
-app.use(cors());
-app.use(express.json());
+const allowedOrigins = [
+    'http://localhost:5173',
+    'http://localhost:5174',
+    'http://localhost:5174/newsapp',
+    'http://localhost:5174/newsapp/news',
+    'https://sid9511.github.io',
+    'https://sid9511.github.io/newsapp',
+    'https://sid9511.github.io/newsapp/news',
+    'https://newsapp-frontend.onrender.com'
+];
 
-// MongoDB Atlas connection
-mongoose.connect(process.env.MONGO_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-})
-  .then(() => console.log('MongoDB connected...'))
-  .catch(err => console.error('MongoDB connection error:', err));
+const corsOptions = {
+    origin: function (origin, callback) {
+        if (allowedOrigins.includes(origin) || !origin) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    },
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    credentials: true,
+    allowedHeaders: ['Origin', 'X-Requested-With', 'Content-Type', 'Accept']
+};
 
-// News model
-const NewsSchema = new mongoose.Schema({
-  title: String,
-  description: String,
-  urlToImage: String,
-  url: String,
-  author: String,
-  publishedAt: Date,
-  source: {
-    id: String,
-    name: String
-  }
-});
+app.use(cors(corsOptions));
+app.options('*', cors(corsOptions));
+app.use(bodyParser.json());
 
-const News = mongoose.model('News', NewsSchema);
+let client;
+
+async function connectToDatabase() {
+    try {
+        client = await MongoClient.connect(url, { useNewUrlParser: true, useUnifiedTopology: true });
+        console.log('Connected successfully to MongoDB');
+    } catch (err) {
+        console.error('Error connecting to MongoDB', err);
+    }
+}
+
+connectToDatabase();
 
 app.get('/', async (req, res) => {
+    if (!client) {
+        return res.status(500).send({ error: 'Database connection not established' });
+    }
+
     try {
-        const db = mongoose.connection.db; // Get the MongoDB database instance
-        const collection = db.collection('News'); // Get the News collection
-        const findResult = await collection.find({}).toArray(); // Fetch all news documents
-        res.json(findResult); // Send the result as JSON
-    } 
-    catch (error) {
+        const db = client.db('categories');
+        const collections = ['general', 'technology', 'business', 'entertainment', 'health', 'science', 'sports'];
+        const results = {};
+
+        for (const collectionName of collections) {
+            const collection = db.collection(collectionName);
+            results[collectionName] = await collection.find({}).toArray();
+        }
+
+        res.json(results);
+    } catch (error) {
         console.error('Error fetching news:', error);
         res.status(500).send({ error: 'Failed to fetch news' });
     }
@@ -49,5 +75,5 @@ app.get('/', async (req, res) => {
 
 // Start server
 app.listen(port, () => {
-  console.log(`Server running on port ${port}`);
+    console.log(`Server running on port http://localhost:${port}`);
 });
