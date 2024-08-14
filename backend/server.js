@@ -34,12 +34,6 @@ const NewsSchema = new mongoose.Schema({
 
 const News = mongoose.model('News', NewsSchema);
 
-// Root route
-app.get('/', (req, res) => {
-  res.send('Welcome to the News API!');
-});
-
-// News route to fetch all news
 app.get('/', async (req, res) => {
     try {
         const db = mongoose.connection.db; // Get the MongoDB database instance
