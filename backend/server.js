@@ -42,7 +42,7 @@ let client;
 
 async function connectToDatabase() {
     try {
-        client = await MongoClient.connect(url, { useNewUrlParser: true, useUnifiedTopology: true });
+        client = await MongoClient.connect(url);
         console.log('Connected successfully to MongoDB');
     } catch (err) {
         console.error('Error connecting to MongoDB', err);
