@@ -11,7 +11,10 @@ app.use(cors());
 app.use(express.json());
 
 // MongoDB Atlas connection
-mongoose.connect(process.env.MONGO_URI)
+mongoose.connect(process.env.MONGO_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+})
   .then(() => console.log('MongoDB connected...'))
   .catch(err => console.error('MongoDB connection error:', err));
 
@@ -36,26 +39,18 @@ app.get('/', (req, res) => {
   res.send('Welcome to the News API!');
 });
 
-// News route
-app.get('/api/news', async (req, res) => {
-  try {
-    const { category, page = 1, pageSize = 10 } = req.query;
-
-    // Query to fetch news by category with pagination
-    const news = await News.find({ "source.name": category })
-      .skip((page - 1) * pageSize)
-      .limit(Number(pageSize));
-
-    const totalResults = await News.countDocuments({ "source.name": category });
-
-    res.json({
-      articles: news,
-      totalResults
-    });
-  } catch (error) {
-    console.error('Error fetching news:', error);
-    res.status(500).json({ message: 'Server Error', error });
-  }
+// News route to fetch all news
+app.get('/', async (req, res) => {
+    try {
+        const db = mongoose.connection.db; // Get the MongoDB database instance
+        const collection = db.collection('News'); // Get the News collection
+        const findResult = await collection.find({}).toArray(); // Fetch all news documents
+        res.json(findResult); // Send the result as JSON
+    } 
+    catch (error) {
+        console.error('Error fetching news:', error);
+        res.status(500).send({ error: 'Failed to fetch news' });
+    }
 });
 
 // Start server
