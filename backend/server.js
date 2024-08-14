@@ -31,7 +31,12 @@ const NewsSchema = new mongoose.Schema({
 
 const News = mongoose.model('News', NewsSchema);
 
-// Routes
+// Root route
+app.get('/', (req, res) => {
+  res.send('Welcome to the News API!');
+});
+
+// News route
 app.get('/api/news', async (req, res) => {
   try {
     const { category, page = 1, pageSize = 10 } = req.query;
