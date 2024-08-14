@@ -78,9 +78,12 @@ const NewsSection = (props) => {
 
   return (
     <div className={`w-full ${darkMode ? 'bg-gray-800' : 'bg-white'}`}>
-      <h1 className={`header text-3xl font-semibold text-center pb-10 pt-24 ${darkMode ? 'text-white' : 'text-black'}`}>
+      <h1 className={`header text-3xl font-semibold text-center pb-7 pt-24 ${darkMode ? 'text-white' : 'text-black'}`}>
         NewsReport - Today's Top {capitalize(props.category)} Headlines
       </h1>
+      <h3 className={`header font-semibold text-center pb-3 ${darkMode ? 'text-white' : 'text-black'}`}>
+        Free News API works only on LocalHost
+      </h3>
 
       {loading && <Loader />}
       {error && <p className="text-center text-red-500">Error: {error}</p>}

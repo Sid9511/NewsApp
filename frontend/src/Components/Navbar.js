@@ -21,7 +21,7 @@ const Navbar = () => {
             <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-10">
                 <div className="relative flex h-16 items-center justify-between">
                     
-                    <Link to="/" className="text-2xl font-bold text-white bg-gray-900 px-3 py-2 rounded-md"
+                    <Link to="/" className={`text-2xl font-bold text-white ${darkMode ? 'bg-gray-800' : 'bg-gray-900'} px-3 py-2 rounded-md`}
                         aria-current="page">
                         NewsReport
                     </Link>
