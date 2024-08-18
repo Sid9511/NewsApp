@@ -130,7 +130,7 @@ const NewsSection = (props) => {
       <h1 className={`header text-3xl font-semibold text-center pb-7 pt-24 ${darkMode ? 'text-white' : 'text-black'}`}>
         NewsReport - Today's Top {capitalize(props.category)} Headlines
       </h1>
-      <h1 className={`header font-semibold text-center pb-3 ${darkMode ? 'text-white' : 'text-black'}`}>
+      <h1 className={`header font-semibold text-center pb-8 mx-24 ${darkMode ? 'text-white' : 'text-black'}`}>
         Free News API works only on LocalHost. For daily news updates buy Premium.  
       </h1>
       <h1 className={`header font-semibold text-center pb-3 ${darkMode ? 'text-white' : 'text-black'}`}>
