@@ -41,16 +41,14 @@ app.use(bodyParser.json());
 let client;
 
 async function connectToDatabase() {
-    try {
-        const clientOptions = {
-            ssl: true, // Ensures SSL/TLS connection
-        };
-        client = await MongoClient.connect(url, clientOptions);
-        console.log('Connected successfully to MongoDB');
-    } catch (err) {
-        console.error('Error connecting to MongoDB', err);
-    }
+  try {
+      client = await MongoClient.connect(url, { ssl: true });
+      console.log('Connected successfully to MongoDB');
+  } catch (err) {
+      console.error('Error connecting to MongoDB', err);
+  }
 }
+
 
 connectToDatabase();
 
