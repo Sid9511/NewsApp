@@ -19,7 +19,7 @@ const NewsSection = (props) => {
 
   const updateNews = async () => {
     props.setProgress(10);
-    const url = `https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.category}&apiKey=${props.apiKey}&pageSize=${props.pageSize}&page=${page}`;
+    const url = `https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.category}&apiKey=${props.apiKey}&pageSize=${props.pageSize}&page=${page}` || "mongodb+srv://siddhantdeshmukhwork:Siddhant_Atlas%40Work.0106@news.lmhep.mongodb.net/?retryWrites=true&w=majority&appName=news";
     setLoading(true);
     setError(null); 
     props.setProgress(40);
@@ -54,7 +54,7 @@ const NewsSection = (props) => {
   }, [props.country, props.category, props.pageSize]);
 
   const fetchMoreData = async () => {
-    const url = `https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.category}&apiKey=${props.apiKey}&pageSize=${props.pageSize}&page=${page + 1}`;
+    const url = `https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.category}&apiKey=${props.apiKey}&pageSize=${props.pageSize}&page=${page + 1}` || "mongodb+srv://siddhantdeshmukhwork:Siddhant_Atlas%40Work.0106@news.lmhep.mongodb.net/?retryWrites=true&w=majority&appName=news";
     setPage(prevPage => prevPage + 1);
     
     try {
