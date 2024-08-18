@@ -168,7 +168,7 @@ const NewsSection = (props) => {
 
       <div className={`w-full px-4 ${darkMode ? 'bg-gray-800' : 'bg-white'}`}>
         <h2 className={`header text-2xl font-semibold text-center pb-7 ${darkMode ? 'text-white' : 'text-black'}`}>
-          Exclusive news, a sneak-peek straight from our demo feed!!!!
+          Exclusive news, a sneak-peek straight from our demo feed !!!
         </h2>
         <div className="flex flex-wrap -mx-2">
           {filteredStaticArticles.slice(0, itemCount).map((element, index) => (

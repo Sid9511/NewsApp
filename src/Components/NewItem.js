@@ -18,10 +18,10 @@ const NewItem = (props) => {
         </div>
 
         <div className="card-body">
-          <h5 className="card-title">{title}...</h5>
-          <p className="card-text">{description}...</p>
-          <p className="card-text mx-0"><small className="text-muted">By- {authors || 'Unknown'}, on {new Date(date).toGMTString()}</small></p>
-          <a href={newsUrl} className={`btn btn-sm ${darkMode ? 'btn-light' : 'btn-dark'}`}>Read More</a>
+          <h5 className="card-title font-semibold">{title}...</h5>
+          <p className="card-text text-xs mt-3" >{description || "Stay informed with the latest updates and in-depth coverage on today’s most important news stories. From breaking headlines to insightful analysis, our coverage brings you the essential information you need to know. Stay connected and informed with our comprehensive news updates, ensuring you never miss a beat in today’s fast-paced world."}...</p>
+          <p className="card-text mx-0 my-2"><small className="text-muted">By- {authors || 'Unknown'}, on {new Date(date).toGMTString()}</small></p>
+          <a href={newsUrl} className={`btn btn-sm my-2 ${darkMode ? 'btn-light' : 'btn-dark'}`}>Read More</a>
         </div>
     </div>
   );
