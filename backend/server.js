@@ -41,45 +41,33 @@ app.use(bodyParser.json());
 let client;
 
 async function connectToDatabase() {
-  try {
-      client = await MongoClient.connect(url, { ssl: true });
-      console.log('Connected successfully to MongoDB');
-  } catch (err) {
-      console.error('Error connecting to MongoDB', err);
-  }
+    try {
+        client = await MongoClient.connect(url);
+        console.log('Connected successfully to MongoDB');
+    } catch (err) {
+        console.error('Error connecting to MongoDB', err);
+    }
 }
-
 
 connectToDatabase();
 
 app.get('/', async (req, res) => {
-  if (!client) {
-      console.error('Database connection not established');
-      return res.status(500).send({ error: 'Database connection not established' });
-  }
+    if (!client) {
+        return res.status(500).send({ error: 'Database connection not established' });
+    }
 
-  try {
-      const db = client.db('categories');
-      const collections = ['data'];
-      const results = {};
-
-      for (const collectionName of collections) {
-          const collection = db.collection(collectionName);
-          const data = await collection.find({}).toArray();
-          
-          console.log(`Found ${data.length} documents in ${collectionName} collection`);
-          
-          results[collectionName] = data;
-      }
-
-      res.json(results);
-  } catch (error) {
-      console.error('Error fetching news:', error);
-      res.status(500).send({ error: 'Failed to fetch news', details: error.message });
-  }
+    try {
+        const db = client.db('categories');
+        const collection = db.collection('data');
+        const findResult = await collection.find({}).toArray();
+        res.json(findResult);
+    } catch (error) {
+        console.error('Error fetching news:', error);
+        res.status(500).send({ error: 'Failed to fetch news' });
+    }
 });
 
-
+// Start server
 app.listen(port, () => {
-    console.log(`Server running on http://localhost:${port}`);
+    console.log(`Server running on port http://localhost:${port}`);
 });
