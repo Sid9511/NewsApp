@@ -7,7 +7,7 @@ const NewItem = (props) => {
 
   return (
     <div className={`card my-4 mx-3 h-[31rem] w-[90%]  ${darkMode ? 'bg-gray-900 text-white' : 'bg-white text-black'}`}>
-      
+    
       <img 
       src={imageUrl || "https://www.livemint.com/lm-img/img/2024/03/11/1600x900/TCS_on_overseas_payments_for_investments_1695628348453_1710144311141.jpg"} 
       className="card-img-top h-60"

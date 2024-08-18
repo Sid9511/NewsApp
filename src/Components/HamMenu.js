@@ -28,37 +28,37 @@ const HamMenu = ({ closeMenu }) => {
                         Home
                     </Link>
                 </li>
-                <li>
-                        <Link to="/technology" className="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">
-                            Technology
-                        </Link>
 
+                <li>
+                    <Link to="/technology" className="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">
+                        Technology
+                    </Link>
                 </li>
+                
                 <li>
                     <Link to="/business" className="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">
                         Business
-                    </Link>
-                        
-                        
+                    </Link>        
                 </li>
+                
                 <li>
                     <Link to="/sports" className="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">
                         Sports
                     </Link>
-
                 </li>
+                
                 <li>
                     <Link to="/science" className="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">
                         Science
                     </Link>
-
                 </li>
+                
                 <li>
                     <Link to="/entertainment" className="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">
                         Entertainment
                     </Link>
-
                 </li>
+                
                 <li>
                     <Link to="/health" className="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">
                         Health
