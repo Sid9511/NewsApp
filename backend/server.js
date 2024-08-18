@@ -42,7 +42,12 @@ let client;
 
 async function connectToDatabase() {
     try {
-        client = await MongoClient.connect(url);
+        const clientOptions = {
+            useNewUrlParser: true,
+            useUnifiedTopology: true,
+            ssl: true, // Ensures SSL/TLS connection
+        };
+        client = await MongoClient.connect(url, clientOptions);
         console.log('Connected successfully to MongoDB');
     } catch (err) {
         console.error('Error connecting to MongoDB', err);
