@@ -11,14 +11,7 @@ const port = process.env.PORT || 3002;
 const url = process.env.MONGO_URI;
 
 const allowedOrigins = [
-    'http://localhost:5173',
-    'http://localhost:5174',
-    'http://localhost:5174/newsapp',
-    'http://localhost:5174/newsapp/news',
-    'https://sid9511.github.io',
-    'https://sid9511.github.io/newsapp',
-    'https://sid9511.github.io/newsapp/news',
-    'https://newsapp-frontend.onrender.com'
+    'http://localhost:3000', // Update to match your frontend URL
 ];
 
 const corsOptions = {
@@ -45,7 +38,9 @@ async function connectToDatabase() {
         client = await MongoClient.connect(url);
         console.log('Connected successfully to MongoDB');
     } catch (err) {
-        console.error('Error connecting to MongoDB', err);
+        console.error('Error connecting to MongoDB', err.message);
+        console.error('Error details:', err);
+        process.exit(1); // Exit the process with error code
     }
 }
 
@@ -67,7 +62,22 @@ app.get('/', async (req, res) => {
     }
 });
 
-// Start server
+// Graceful shutdown
+process.on('SIGTERM', () => {
+    console.log('SIGTERM signal received: closing HTTP server');
+    if (client) {
+        client.close().then(() => {
+            console.log('MongoDB client disconnected');
+            process.exit(0);
+        }).catch((err) => {
+            console.error('Error disconnecting MongoDB client', err);
+            process.exit(1);
+        });
+    } else {
+        process.exit(0);
+    }
+});
+
 app.listen(port, () => {
     console.log(`Server running on port http://localhost:${port}`);
 });

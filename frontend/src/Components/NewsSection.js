@@ -162,7 +162,6 @@
 
 
 
-
 import React, { useEffect, useState } from "react";
 import NewItem from "./NewItem";
 import Loader from "./Loader";
@@ -191,7 +190,11 @@ const NewsSection = (props) => {
     props.setProgress(40);
 
     try {
-      const response = await fetch(url);
+      const response = await fetch(url, {
+        headers: {
+          'Authorization': `Bearer ${props.apiKey}`, // Assuming Bearer token is needed
+        },
+      });
       if (!response.ok) {
         const errorData = await response.json();
         throw new Error(`Error ${response.status}: ${errorData.message} (Code: ${errorData.code})`);
@@ -225,7 +228,11 @@ const NewsSection = (props) => {
     setPage(nextPage);
     
     try {
-      const response = await fetch(url);
+      const response = await fetch(url, {
+        headers: {
+          'Authorization': `Bearer ${props.apiKey}`, // Assuming Bearer token is needed
+        },
+      });
       if (!response.ok) {
         const errorData = await response.json();
         throw new Error(`Error ${response.status}: ${errorData.message} (Code: ${errorData.code})`);
@@ -286,19 +293,20 @@ const NewsSection = (props) => {
 };
 
 NewsSection.defaultProps = {
-  apiBaseUrl="https://your-backend-url.com",
   country: "in",
   pageSize: 6,
   category: "general",
+  apiBaseUrl: "https://your-backend-url/api/news", // Replace with your actual API endpoint
 };
 
 NewsSection.propTypes = {
   country: PropTypes.string,
   pageSize: PropTypes.number,
   category: PropTypes.string,
-  apiKey: PropTypes.string.isRequired,  
-  setProgress: PropTypes.func.isRequired, 
+  apiKey: PropTypes.string.isRequired,
+  setProgress: PropTypes.func.isRequired,
   apiBaseUrl: PropTypes.string.isRequired,
 };
 
 export default NewsSection;
+
