@@ -43,8 +43,6 @@ let client;
 async function connectToDatabase() {
     try {
         const clientOptions = {
-            useNewUrlParser: true,
-            useUnifiedTopology: true,
             ssl: true, // Ensures SSL/TLS connection
         };
         client = await MongoClient.connect(url, clientOptions);
