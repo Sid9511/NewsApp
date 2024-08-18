@@ -58,12 +58,16 @@ app.get('/', async (req, res) => {
 
     try {
         const db = client.db('categories');
-        const collections = ['general', 'technology', 'business', 'entertainment', 'health', 'science', 'sports'];
+        const collections = ['data'];
         const results = {};
 
         for (const collectionName of collections) {
             const collection = db.collection(collectionName);
-            results[collectionName] = await collection.find({}).toArray();
+            const data = await collection.find({}).toArray();
+            
+            console.log(`Found ${data.length} documents in ${collectionName} collection`);
+            
+            results[collectionName] = data;
         }
 
         res.json(results);
@@ -74,5 +78,5 @@ app.get('/', async (req, res) => {
 });
 
 app.listen(port, () => {
-    console.log(`Server running on port http://localhost:${port}`);
+    console.log(`Server running on http://localhost:${port}`);
 });
